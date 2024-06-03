@@ -1,0 +1,16 @@
+[Unit]
+Description=Monitor system usage and send email alerts
+
+[Service]
+ExecStart=/home/ec2-user/miniforge3/bin/python	/home/ec2-user/monitoring/monitor_usage.py
+WorkingDirectory=/home/ec2-user/monitoring
+Restart=on-failure
+User=ec2-user
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=monitor_usage
+
+[Install]
+WantedBy=multi-user.target
+
